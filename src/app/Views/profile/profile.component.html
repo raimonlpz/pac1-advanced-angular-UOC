@@ -1,0 +1,50 @@
+<div class="profile-wrapper">
+
+  <h3>Profile</h3>
+  <hr/>
+  <div class="profile-section">
+    <div class="profile-data-wrapper" *ngIf="profile">
+        <div class="item"><h4>Name: <span class="content">{{profile.name ? profile.name : '-'}}</span></h4></div>
+        <div class="item"><h4>Surname: <span class="content">{{profile.surname ? profile.surname : '-'}}</span></h4></div>
+        <div class="item"><h4>Birth date: <span class="content">{{profile.birthDate ? profile.birthDate : '-'}}</span></h4></div>
+        <div class="item"><h4>Phone: <span class="content">{{profile.phone ? profile.phone : '-'}}</span></h4></div>
+        <div class="item"><h4>Nationality: <span class="content">{{profile.nationality ? profile.nationality : '-'}}</span></h4></div>
+        <div class="item"><h4>NIF: <span class="content">{{profile.nif ? profile.nif : '-'}}</span></h4></div>
+        <div class="item"><h4>About me: <span class="content">{{profile.aboutMe ? profile.aboutMe : '-'}}</span></h4></div>
+
+        <div class="item" *ngIf="userLoggedIn?.type === 1"><h4>Company name: <span class="content">{{profile.companyName ? profile.companyName : '-'}}</span></h4></div>
+        <div class="item" *ngIf="userLoggedIn?.type === 1"><h4>Company description: <span class="content">{{profile.companyDescription ? profile.companyDescription : '-'}}</span></h4></div>
+        <div class="item" *ngIf="userLoggedIn?.type === 1"><h4>CIF: <span class="content">{{profile.cif ? profile.cif : '-'}}</span></h4></div>
+    </div>
+
+    <div class="profile-edit-action">
+      <button class="profile-edit-btn" (click)="updateProfileInfo()">Update Profile Information</button>
+    </div>
+  </div>
+
+  <h3>Education</h3>
+  <hr/>
+  <div class="education-section">
+    <table class="education-table">
+      <tr>
+        <th>Type</th>
+        <th>Level</th>
+        <th>Name</th>
+        <th>University</th>
+        <th>Finish Date</th>
+        <th>Actions</th>
+      </tr>
+      <ng-container *ngIf="profile?.education && profile?.education.length > 0">
+        <tr *ngFor="let edu of profile.education" >
+          <td>{{edu.type}}</td>
+          <td>{{edu.level}}</td>
+          <td>{{edu.name}}</td>
+          <td>{{edu.university}}</td>
+          <td>{{ edu.finishDate }}</td>
+          <td><button class="update-btn" (click)="updateEducation(edu.id)">Update</button><button class="delete-btn" (click)="deleteEducation(edu.id)">Delete</button></td>
+        </tr>
+      </ng-container>
+    </table>
+    <button routerLink="/profile/education" class="new-btn">New Education</button>
+  </div>
+</div>

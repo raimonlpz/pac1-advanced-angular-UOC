@@ -1,0 +1,77 @@
+<div class="activity-wrapper">
+  <h3 *ngIf="activityId; else addActivity;">Edit Activity</h3>
+  <ng-template #addActivity>
+    <h3>Add Activity</h3>
+  </ng-template>
+  <hr />
+  <form [formGroup]="activityForm" class="activity-form" (ngSubmit)="submitActivityChangesToService()" *ngIf="activityForm">
+    <div class="activity-name item">
+      <label>Name: </label>
+      <input type="text" [formControl]="name" placeholder="Activity name" />
+      <div class="activity-error" *ngIf="activityForm.get('name').errors && (activityForm.get('name').touched || activityForm.get('name').dirty)">
+        <span *ngIf="activityForm.get('name').errors.required">Activity name is required.<br/></span>
+        <span *ngIf="activityForm.get('name').errors.minlength">Activity name must be at least 3 chars long.<br/></span>
+        <span *ngIf="activityForm.get('name').errors.maxlength">Activity name must be at most 55 chars long.</span>
+      </div>
+    </div>
+    <div class="activity-category item">
+      <label>Category: </label>
+      <select [formControl]="category" (change)="onCategoryChangeAssignValueToSubCat()">
+        <option *ngFor="let c of categoryTypes;" [value]="c">{{c}}</option>
+      </select>
+      <div class="activity-error" *ngIf="activityForm.get('category').errors && (activityForm.get('category').touched || activityForm.get('category').dirty)">
+        <span *ngIf="activityForm.get('category').errors.required">Category is required.</span>
+      </div>
+    </div>
+    <div class="activity-subcategory item">
+      <label>Subcategory: </label>
+      <select [formControl]="subcategory">
+        <ng-container *ngIf="category.value === categoryTypes[0]">
+          <option *ngFor="let subCYP of subcategoryTypesCYP;" [value]="subCYP">{{subCYP}}</option>
+        </ng-container>
+        <ng-container *ngIf="category.value === categoryTypes[1]">
+          <option *ngFor="let subEno of subcategoryTypesEno;" [value]="subEno">{{subEno}}</option>
+        </ng-container>
+        <ng-container *ngIf="category.value === categoryTypes[2]">
+          <option *ngFor="let subPl of subcategoryTypesPlaya;" [value]="subPl">{{subPl}}</option>
+        </ng-container>
+      </select>
+      <div class="activity-error" *ngIf="activityForm.get('subcategory').errors && (activityForm.get('subcategory').touched || activityForm.get('subcategory').dirty)">
+        <span *ngIf="activityForm.get('subcategory').errors.required">Subcategory is required.</span>
+      </div>
+    </div>
+    <div class="activity-description item">
+      <label>Description: </label>
+      <textarea type="text" [formControl]="description" placeholder="Activity description"></textarea>
+    </div>
+
+    <div class="activity-language item">
+      <label>Language: </label>
+      <select [formControl]="language">
+        <option *ngFor="let lang of languageTypes;" [value]="lang">{{lang}}</option>
+      </select>
+      <div class="activity-error" *ngIf="activityForm.get('language').errors && (activityForm.get('language').touched || activityForm.get('language').dirty)">
+        <span *ngIf="activityForm.get('language').errors.required">Language is required.</span>
+      </div>
+    </div>
+    <div class="activity-date item">
+      <label>Date: </label>
+      <input type="text" [formControl]="date" placeholder="dd/mm/yyyy" />
+      <div class="activity-error" *ngIf="activityForm.get('date').errors && (activityForm.get('date').touched || activityForm.get('date').dirty)">
+        <span *ngIf="activityForm.get('date').errors.pattern">Date must have a valid format (dd/mm/yyyy).</span>
+      </div>
+    </div>
+    <div class="activity-price item">
+      <label>Price: </label>
+      <input type="number" [formControl]="price"/>
+      <div class="activity-error" *ngIf="activityForm.get('price').errors && (activityForm.get('price').touched || activityForm.get('price').dirty)">
+        <span *ngIf="activityForm.get('price').errors.required">Price is required.<br/></span>
+        <span *ngIf="activityForm.get('price').errors.min">Digit must be bigger than 0.</span>
+      </div>
+    </div>
+
+    <div class="activity-submit">
+      <button type="submit" [disabled]="!activityForm.valid">SUBMIT</button>
+    </div>
+  </form>
+</div>

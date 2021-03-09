@@ -1,0 +1,4 @@
+<div class="home-wrapper">
+  <app-activities-list style="width:45%;" (activityToSeeInDetail)="onActivitySelected($event)"></app-activities-list>
+  <app-activity-detail style="width:45%;" [activitySelected]="activitySelected" ></app-activity-detail>
+</div>

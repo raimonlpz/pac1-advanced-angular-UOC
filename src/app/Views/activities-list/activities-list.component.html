@@ -1,0 +1,22 @@
+<div class="activities-list">
+  <h3>Activities List</h3>
+  <hr/>
+  <table style="width:100%;" *ngIf="activityList">
+    <tr>
+      <th>NAME</th>
+      <th>CATEGORY</th>
+      <th>PRICE</th>
+      <th>LANGUAGE</th>
+      <th>DATE</th>
+      <th>ACTIONS</th>
+    </tr>
+    <tr *ngFor="let activity of activityList">
+      <td>{{activity.name}}</td>
+      <td>{{activity.category}}</td>
+      <td>{{activity.price}}</td>
+      <td>{{activity.language}}</td>
+      <td>{{activity.date | date: 'M/d/yy'}}</td>
+      <td><button (click)="onActionClicked(activity)">➡️</button></td>
+    </tr>
+  </table>
+</div>

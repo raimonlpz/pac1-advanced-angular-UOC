@@ -1,0 +1,31 @@
+<div class="admin-wrapper">
+  <h3>Admin</h3>
+  <hr/>
+  <table class="admin-table">
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Subcategory</th>
+      <th>Description</th>
+      <th>Language</th>
+      <th>Date</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+    <ng-container *ngIf="activities && activities.length > 0">
+      <tr *ngFor="let a of activities" >
+        <td>{{a.name}}</td>
+        <td>{{a.category}}</td>
+        <td>{{a.subcategory}}</td>
+        <td>{{a.description}}</td>
+        <td>{{a.language}}</td>
+        <td>{{a.date}}</td>
+        <td>{{a.price}}</td>
+        <td>
+          <button class="update-btn" (click)="updateActivity(a.id)">Update</button>
+          <button class="delete-btn" (click)="deleteActivity(a.id)">Delete</button></td>
+      </tr>
+    </ng-container>
+  </table>
+  <button routerLink="/admin/activity" class="new-btn">New Activity</button>
+</div>

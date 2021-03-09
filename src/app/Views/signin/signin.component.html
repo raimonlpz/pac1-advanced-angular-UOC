@@ -1,0 +1,28 @@
+<div class="signin-wrapper">
+  <h1 class="signin-title">Sign In</h1>
+  <form [formGroup]="signinForm" (ngSubmit)="submitSignin()" class="signin-form">
+    <div class="signin-email">
+      <label>Email: </label>
+      <input type="email" [formControl]="email" placeholder="Your email" />
+      <div class="signin-error" *ngIf="signinForm.get('email').errors && (signinForm.get('email').touched || signinForm.get('email').dirty)">
+        <span *ngIf="signinForm.get('email').errors.required">Email is required.<br/></span>
+        <span *ngIf="signinForm.get('email').errors.pattern">User email must have a valid format.</span>
+      </div>
+    </div>
+
+    <div class="signin-password">
+      <label>Password: </label>
+      <input type="password" [formControl]="password" placeholder="Your password"/>
+      <div class="signin-error" *ngIf="signinForm.get('password').errors && (signinForm.get('password').touched || signinForm.get('password').dirty)">
+        <span *ngIf="signinForm.get('password').errors.required">Password is required</span>
+      </div>
+    </div>
+
+    <div class="signin-error" *ngIf="userNotFoundNotification">
+      <span>Error: User not found. Try changing mail/password.</span>
+    </div>
+    <div class="signin-submit">
+      <button type="submit" [disabled]="!signinForm.valid">Login</button>
+    </div>
+  </form>
+</div>

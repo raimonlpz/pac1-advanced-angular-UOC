@@ -1,0 +1,72 @@
+<div class="join-wrapper">
+  <h1 class="join-title">Join Now</h1>
+  <form [formGroup]="joinForm" (ngSubmit)="submitJoinNow()" class="join-form">
+
+    <div class="join-name label">
+      <label>Name: </label>
+      <input type="text" [formControl]="name" placeholder="Your name" />
+      <div class="join-error" *ngIf="joinForm.get('name').errors && (joinForm.get('name').touched || joinForm.get('name').dirty)">
+        <span *ngIf="joinForm.get('name').errors.required">Name is required.<br/></span>
+        <span *ngIf="joinForm.get('name').errors.minlength">Name must be 3 characters long min.<br/></span>
+        <span *ngIf="joinForm.get('name').errors.maxlength">Name must be 55 characters long max.<br/></span>
+        <span *ngIf="joinForm.get('name').errors.pattern">Name must have a valid format.</span>
+      </div>
+    </div>
+
+    <div class="join-surname label">
+      <label>Surname: </label>
+      <input type="text" [formControl]="surname" placeholder="Your surname" />
+      <div class="join-error" *ngIf="joinForm.get('surname').errors && (joinForm.get('surname').touched || joinForm.get('surname').dirty)">
+        <span *ngIf="joinForm.get('surname').errors.minlength">Surname must be 3 characters long min.<br/></span>
+        <span *ngIf="joinForm.get('surname').errors.maxlength">Surname must be 55 characters long max.<br/></span>
+        <span *ngIf="joinForm.get('surname').errors.pattern">Surname must have a valid format.</span>
+      </div>
+    </div>
+
+    <div class="join-type label">
+      <label>Type: </label>
+      <select [formControl]="type">
+        <option [value]="0">Tourist</option>
+        <option [value]="1">Company</option>
+      </select>
+      <div class="join-error" *ngIf="joinForm.get('type').errors && (joinForm.get('type').touched || joinForm.get('type').dirty)">
+        <span *ngIf="joinForm.get('type').errors.required">Type is required.</span>
+      </div>
+    </div>
+
+    <div class="join-email label">
+      <label>Email: </label>
+      <input type="email" [formControl]="email" placeholder="Your email" />
+      <div class="join-error" *ngIf="joinForm.get('email').errors && (joinForm.get('email').touched || joinForm.get('email').dirty)">
+        <span *ngIf="joinForm.get('email').errors.required">Email is required.<br/></span>
+        <span *ngIf="joinForm.get('email').errors.pattern">User email must have a valid format.</span>
+      </div>
+    </div>
+
+    <div class="join-password label">
+      <label>Password: </label>
+      <input type="password" [formControl]="password" placeholder="Your password" />
+      <div class="join-error" *ngIf="joinForm.get('password').errors && (joinForm.get('password').touched || joinForm.get('password').dirty)">
+        <span *ngIf="joinForm.get('password').errors.required">Password is required.<br/></span>
+        <span *ngIf="joinForm.get('password').errors.minlength">Password must be at least 8 characters long.</span>
+      </div>
+    </div>
+
+    <div class="join-repeat-password label">
+      <label>Repeat Password: </label>
+      <input type="password" [formControl]="repeatPassword" placeholder="Your password" />
+      <div class="join-error" *ngIf="joinForm.get('repeatPassword').errors && (joinForm.get('repeatPassword').touched || joinForm.get('repeatPassword').dirty)">
+        <span *ngIf="joinForm.get('repeatPassword').errors.required">Password confirmation is required.<br/></span>
+        <span *ngIf="joinForm.get('repeatPassword').errors.minlength">Password must be at least 8 characters long.<br/></span>
+        <span *ngIf="joinForm.get('repeatPassword').errors.invalidPassword">Confirmation password does not match</span>
+      </div>
+    </div>
+
+    <div class="join-error" *ngIf="userAlreadyExistsNotification">
+      <span>Error: This user already exists. Go Sign in.</span>
+    </div>
+    <div class="join-submit">
+      <button type="submit" [disabled]="!joinForm.valid">Join Now</button>
+    </div>
+  </form>
+</div>

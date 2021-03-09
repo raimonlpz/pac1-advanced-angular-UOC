@@ -1,0 +1,84 @@
+<div class="profile-wrapper">
+  <div class="profile-form">
+    <h3>Update Profile</h3>
+    <hr/>
+    <form [formGroup]="profileForm" class="profile-form" (ngSubmit)="submitProfileForm()" *ngIf="profile">
+      <div class="profile-name item">
+        <label>Name: </label>
+        <input type="text" [formControl]="name" placeholder="Your name" />
+        <div class="profile-error" *ngIf="profileForm.get('name').errors && (profileForm.get('name').touched || profileForm.get('name').dirty)">
+          <span *ngIf="profileForm.get('name').errors.required">Name is required.<br/></span>
+          <span *ngIf="profileForm.get('name').errors.minlength">Name must be at least 3 chars long.<br/></span>
+          <span *ngIf="profileForm.get('name').errors.maxlength">Name must be at most 55 chars long.<br/></span>
+          <span *ngIf="profileForm.get('name').errors.pattern">Name must have a valid format (no whitespaces/special chars).</span>
+        </div>
+      </div>
+      <div class="profile-surname item">
+        <label>Surname: </label>
+        <input type="text" [formControl]="surname" placeholder="Your surname" />
+        <div class="profile-error" *ngIf="profileForm.get('surname').errors && (profileForm.get('surname').touched || profileForm.get('surname').dirty)">
+          <span *ngIf="profileForm.get('surname').errors.minlength">Surname must be at least 3 chars long.<br/></span>
+          <span *ngIf="profileForm.get('surname').errors.maxlength">Surname must be at most 55 chars long.<br/></span>
+          <span *ngIf="profileForm.get('surname').errors.pattern">Surname must have a valid format (no whitespaces/special chars).</span>
+        </div>
+      </div>
+      <div class="profile-birthdate item">
+        <label>Birth Date: </label>
+        <input type="text" [formControl]="birthDate" placeholder="dd/mm/yyyy" />
+        <div class="profile-error" *ngIf="profileForm.get('birthDate').errors && (profileForm.get('birthDate').touched || profileForm.get('birthDate').dirty)">
+          <span *ngIf="profileForm.get('birthDate').errors.pattern">Birth date must have a valid format (dd/mm/yyyy).</span>
+        </div>
+      </div>
+      <div class="profile-phone item">
+        <label>Phone: </label>
+        <input type="number" [formControl]="phone" placeholder="Your phone" />
+      </div>
+      <div class="profile-nationality item">
+        <label>Nationality: </label>
+        <select [formControl]="nationality">
+          <option *ngFor="let n of nationalities" [value]="n">{{n}}</option>
+        </select>
+        <div class="profile-error" *ngIf="profileForm.get('nationality').errors && (profileForm.get('nationality').touched || profileForm.get('nationality').dirty)">
+          <span *ngIf="profileForm.get('nationality').errors.required">Nationality is required.</span>
+        </div>
+      </div>
+      <div class="profile-nif item">
+        <label>NIF: </label>
+        <input type="text" [formControl]="nif" placeholder="Your NIF" />
+        <div class="profile-error" *ngIf="profileForm.get('nif').errors && (profileForm.get('nif').touched || profileForm.get('nif').dirty)">
+          <!-- <span *ngIf="profileForm.get('nif').errors.required">Nif is required.<br/></span> -->
+        </div>
+      </div>
+      <div class="profile-about item">
+        <label>About me: </label>
+        <textarea [formControl]="aboutMe" placeholder="Tell us about you"></textarea>
+      </div>
+
+      <div class="profile-companyname item" *ngIf="userLoggedIn?.type === 1">
+        <label>Company name: </label>
+        <input type="text" [formControl]="companyName" placeholder="Your company name" />
+        <div class="profile-error" *ngIf="profileForm.get('companyName').errors && (profileForm.get('companyName').touched || profileForm.get('companyName').dirty)">
+          <span *ngIf="profileForm.get('companyName').errors.required">Company name is required.<br/></span>
+          <span *ngIf="profileForm.get('companyName').errors.minlength">Company name must be at least 3 chars long.<br/></span>
+          <span *ngIf="profileForm.get('companyName').errors.maxlength">Company name must be at most 255 chars long.<br/></span>
+          <span *ngIf="profileForm.get('companyName').errors.pattern">Company name must have a valid format (no whitespaces initially).</span>
+        </div>
+      </div>
+      <div class="profile-companydescription item" *ngIf="userLoggedIn?.type === 1">
+        <label>Company description: </label>
+        <textarea [formControl]="companyDescription" placeholder="Tell us about your company"></textarea>
+      </div>
+      <div class="profile-cif item" *ngIf="userLoggedIn?.type === 1">
+        <label>CIF: </label>
+        <input type="text" [formControl]="cif" placeholder="CIF" />
+        <div class="profile-error" *ngIf="profileForm.get('cif').errors && (profileForm.get('cif').touched || profileForm.get('cif').dirty)">
+          <span *ngIf="profileForm.get('cif').errors.required">CIF is required.<br/></span>
+        </div>
+      </div>
+
+      <div class="profile-submit">
+        <button type="submit" [disabled]="!profileForm.valid">UPDATE</button>
+      </div>
+    </form>
+  </div>
+</div>

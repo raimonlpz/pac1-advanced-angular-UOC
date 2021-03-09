@@ -1,0 +1,41 @@
+.activity-wrapper {
+  min-height: 70vh;
+}
+
+.activity-form {
+  width: max-content;
+  border-radius: 4px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  text-align: start;
+  box-shadow: 0 0 8px 2px #888;
+  padding: 1rem;
+}
+
+.item {
+width: 100%;
+margin: 1rem;
+margin-left: .5rem;
+}
+
+input, select, option {
+  font-size:1rem;
+}
+
+.activity-submit {
+margin-right:50%;
+transform: translateX(50%);
+}
+
+.activity-submit button {
+font-size: 1.1rem;
+padding: .4rem;
+}
+
+
+.activity-error {
+color:rgb(253, 85, 85);
+font-size: .9rem;
+padding: .3rem;
+text-align:end;
+}

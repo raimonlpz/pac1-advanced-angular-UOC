@@ -1,0 +1,34 @@
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: .25rem;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+.admin-table {
+  width: 100%;
+  text-align: center;
+}
+
+.update-btn {
+  text-transform: uppercase;
+  background-color: chartreuse;
+}
+
+.delete-btn {
+  text-transform: uppercase;
+  background-color: rgb(255, 131, 131);
+}
+
+.new-btn {
+  text-transform: uppercase;
+  background-color: rgb(162, 184, 250);
+}
+
+.update-btn, .delete-btn, .new-btn {
+  padding: .5rem;
+  margin: .5rem;
+}

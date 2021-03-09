@@ -1,0 +1,30 @@
+####### CHECKLIST TO-DO #######
+
+- Configurar navegacion entre pantallas de la app
+
+- Configurar paquete angular-in-memory-web-api con todos
+los objetos/modelos necesarios
+
+- Autenticación de la plataforma
+
+- Registro a la plataforma
+
+- Funcionalidad logout
+
+- Pantalla profile turista
+
+- Pantalla profile empresa
+
+- Pantalla lista-detalle actividades (pantalla principal)
+
+- Pantalla mis actividades
+
+- Pantalla ADMIN perfil empresa
+
+- Funcionalidades:
+  1) Inscribir/anular inscripción de una actividad
+  2) Contadores del número de inscritos de una actividad
+
+- Diferentes puntos de menú en función del perfil del usuario autenticado
+
+- [EXTRA] Funcionalidad mis favoritos con LocalStorage

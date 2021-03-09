@@ -1,0 +1,78 @@
+h3 {
+  text-transform: uppercase;
+}
+
+.content {
+  font-weight: normal;
+  border: .5px solid black;
+  padding: .5rem;
+  border-radius: 4px;
+}
+
+.profile-section {
+  display: flex;
+}
+
+.profile-data-wrapper {
+  min-width: max-content;
+  width: 40%;
+  border-radius: 4px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  text-align: start;
+  box-shadow: 0 0 8px 2px #888;
+  padding: 1rem;
+}
+
+.profile-edit-action {
+  display: inline-block;
+}
+
+.item {
+  width: 100%;
+  margin: 2rem;
+  margin-left: .5rem;
+}
+
+.profile-edit-btn {
+  height: 3rem;
+  background-color: chartreuse;
+  text-transform: uppercase;
+  margin: 2rem;
+  margin-right: 5rem;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: .25rem;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+.education-table {
+  width: 100%;
+  text-align: center;
+}
+
+.update-btn {
+  text-transform: uppercase;
+  background-color: chartreuse;
+}
+
+.delete-btn {
+  text-transform: uppercase;
+  background-color: rgb(255, 131, 131);
+}
+
+.new-btn {
+  text-transform: uppercase;
+  background-color: rgb(162, 184, 250);
+}
+
+.update-btn, .delete-btn, .new-btn {
+  padding: .5rem;
+  margin: .5rem;
+}

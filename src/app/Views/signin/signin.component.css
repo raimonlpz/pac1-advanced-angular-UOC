@@ -1,0 +1,48 @@
+.signin-wrapper {
+  padding: .3rem;
+  min-height: 60vh;
+  margin-top:2rem;
+  margin-bottom:2rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 0 8px 2px #888;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  align-items: flex-end;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+}
+
+.signin-email, .signin-password {
+  margin-bottom: 1.5rem;
+}
+
+.signin-submit {
+  margin-right:50%;
+  transform: translateX(50%);
+}
+
+.signin-submit button {
+  font-size: 1.1rem;
+  padding: .4rem;
+}
+
+input {
+  font-size: 1.1rem;
+  padding: .4rem;
+  border-radius: 4px;
+}
+
+.signin-error {
+  color:rgb(253, 85, 85);
+  font-size: .9rem;
+  padding: .3rem;
+  text-align:end;
+}

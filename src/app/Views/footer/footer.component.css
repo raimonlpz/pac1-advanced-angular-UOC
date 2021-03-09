@@ -1,0 +1,18 @@
+.footer-wrapper {
+  display:flex;
+  justify-content: space-between;
+}
+
+.footer-wrapper-item {
+  width: 33%;
+}
+
+.footer-wrapper-item .title {
+  text-align: center;
+}
+
+.footer-wrapper-item .credits {
+  text-align: end;
+  margin-right: 2rem;
+}
+

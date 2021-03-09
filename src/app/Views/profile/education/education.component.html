@@ -1,0 +1,61 @@
+<div class="education-wrapper">
+  <h3 *ngIf="educationId; else addEd;">Edit Education</h3>
+  <ng-template #addEd>
+    <h3>Add Education</h3>
+  </ng-template>
+  <hr />
+  <form [formGroup]="educationForm" class="education-form" (ngSubmit)="submitEducationChangesToUserProfile()">
+    <div class="education-type item">
+      <label>Type: </label>
+      <select [formControl]="type" (change)="onEduTypeChangeAssignValueToLevel()">
+        <option *ngFor="let eduType of educationTypes;" [value]="eduType">{{eduType}}</option>
+      </select>
+      <div class="education-error" *ngIf="educationForm.get('type').errors && (educationForm.get('type').touched || educationForm.get('type').dirty)">
+        <span *ngIf="educationForm.get('type').errors.required">Education type is required.<br/></span>
+      </div>
+    </div>
+    <div class="education-level item">
+      <label>Level: </label>
+      <select [formControl]="level">
+        <ng-container *ngIf="type.value == educationTypes[0]; else levelFormativo;">
+          <option *ngFor="let eduLevelUni of educationLevelUniversitarios" [value]="eduLevelUni">{{eduLevelUni}}</option>
+        </ng-container>
+        <ng-template #levelFormativo>
+          <option *ngFor="let eduLevelCiclo of educationLevelFormativos" [value]="eduLevelCiclo">{{eduLevelCiclo}}</option>
+        </ng-template>
+      </select>
+      <div class="education-error" *ngIf="educationForm.get('level').errors && (educationForm.get('level').touched || educationForm.get('level').dirty)">
+        <span *ngIf="educationForm.get('level').errors.required">Education level is required.<br/></span>
+      </div>
+    </div>
+    <div class="education-name item">
+      <label>Name: </label>
+      <input type="text" [formControl]="name" placeholder="Studies name" />
+      <div class="education-error" *ngIf="educationForm.get('name').errors && (educationForm.get('name').touched || educationForm.get('name').dirty)">
+        <span *ngIf="educationForm.get('name').errors.required">Studies name is required.<br/></span>
+        <span *ngIf="educationForm.get('name').errors.minlength">Studies name must be at least 3 chars long.<br/></span>
+        <span *ngIf="educationForm.get('name').errors.maxlength">Studies name must be at most 55 chars long.</span>
+      </div>
+    </div>
+    <div class="education-university item">
+      <label>University: </label>
+      <input type="text" [formControl]="university" placeholder="University name" />
+      <div class="education-error" *ngIf="educationForm.get('university').errors && (educationForm.get('university').touched || educationForm.get('university').dirty)">
+        <span *ngIf="educationForm.get('university').errors.required">University is required.<br/></span>
+        <span *ngIf="educationForm.get('university').errors.minlength">University name must be at least 3 chars long.<br/></span>
+        <span *ngIf="educationForm.get('university').errors.maxlength">University name must be at most 55 chars long.</span>
+      </div>
+    </div>
+    <div class="education-finishDate item">
+      <label>Finish Date: </label>
+      <input type="text" [formControl]="finishDate" placeholder="dd/mm/yyyy" />
+      <div class="education-error" *ngIf="educationForm.get('finishDate').errors && (educationForm.get('finishDate').touched || educationForm.get('finishDate').dirty)">
+        <span *ngIf="educationForm.get('finishDate').errors.pattern">Date must have a valid format (dd/mm/yyyy).</span>
+      </div>
+    </div>
+
+    <div class="education-submit">
+      <button type="submit" [disabled]="!educationForm.valid">SUBMIT</button>
+    </div>
+  </form>
+</div>
