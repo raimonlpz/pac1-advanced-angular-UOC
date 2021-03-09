@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/Shared/models/activity';
 import { User } from 'src/app/Shared/models/user';
+import { ActivityService } from 'src/app/Shared/services/activity.service';
 import { AuthService } from 'src/app/Shared/services/auth.service';
 
 @Component({
@@ -11,11 +12,19 @@ import { AuthService } from 'src/app/Shared/services/auth.service';
 })
 export class ActivityDetailComponent implements OnInit, OnDestroy {
   @Input() activitySelected: Activity;
+  @Input() userIsSignedUp: boolean;
+  @Output() cancelSubscription = new EventEmitter();
+
+  userAlreadyInscribed = false;
 
   userLoggedIn: User = null;
   isLoggedSub$: Subscription;
+  activityServiceSub$: Subscription;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private activityService: ActivityService,
+  ) { }
 
   ngOnInit(): void {
     this.isLoggedSub$ = this.authService.userLoggedIn.subscribe(userIsLogged => {
@@ -27,7 +36,31 @@ export class ActivityDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  signUpUser(): void {
+    if (this.activitySelected.peopleRegistered.indexOf(this.userLoggedIn.id) === -1) {
+      this.activitySelected.peopleRegistered.push(this.userLoggedIn.id);
+      this.activityServiceSub$ = this.activityService.updateActivity({
+        ...this.activitySelected
+      }).subscribe(() => {});
+    } else {
+      this.userAlreadyInscribed = true;
+      setTimeout(() => {
+        this.userAlreadyInscribed = false;
+      }, 2000);
+    }
+  }
+
+  cancelSignUpUser(): void {
+    this.activitySelected.peopleRegistered.splice(this.activitySelected.peopleRegistered.indexOf(this.userLoggedIn.id), 1);
+    this.activityServiceSub$ = this.activityService.updateActivity({
+      ...this.activitySelected
+    }).subscribe(() => {
+      this.cancelSubscription.emit();
+    });
+  }
+
   ngOnDestroy(): void {
-    this.isLoggedSub$.unsubscribe();
+    if (this.isLoggedSub$) { this.isLoggedSub$.unsubscribe(); }
+    if (this.activityServiceSub$) { this.activityServiceSub$.unsubscribe(); }
   }
 }

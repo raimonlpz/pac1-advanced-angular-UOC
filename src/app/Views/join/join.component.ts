@@ -76,6 +76,7 @@ export class JoinComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
         console.log(loggedIn);
       } else {
+        /* TO-DO!!!! FIX ISSUE ON USER ALREADY EXISTS */
         if (this.firstBehaviorSubjectSetUpAbortion) { this.userAlreadyExistsNotification = true; }
       }
       this.firstBehaviorSubjectSetUpAbortion = true;
@@ -93,9 +94,7 @@ export class JoinComponent implements OnInit, OnDestroy {
       profile: isTourist
         ? new TouristProfile(this.name.value, null, null, [], this.surname.value)
         : new CompanyProfile(this.name.value, null, null, [], null, null, null, this.surname.value),
-      activitiesFavsIds: isTourist ? [] : null,
-      activitiesJoinedIds: isTourist ? [] : null,
-      activitiesCreatedIds: isTourist ? null : []
+      activitiesFavsIds: isTourist ? [] : null
     });
   }
 

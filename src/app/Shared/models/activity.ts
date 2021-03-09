@@ -48,7 +48,7 @@ interface IActivity {
   readonly price: number;
   readonly language: Languages;
   readonly date: string;
-  peopleRegistered: number;
+  peopleRegistered: Array<number>;
 }
 
 export class Activity implements IActivity {
@@ -61,7 +61,7 @@ export class Activity implements IActivity {
     public price: number,
     public language: Languages,
     public date: string,
-    public peopleRegistered: number,
+    public peopleRegistered: Array<number>,
     public id?: number,
   ) {}
 }

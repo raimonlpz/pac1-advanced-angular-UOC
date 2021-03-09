@@ -30,3 +30,11 @@
   background-color: cornflowerblue;
   color: blanchedalmond;
 }
+
+
+.activity-error {
+  color:rgb(253, 85, 85);
+  font-size: .9rem;
+  padding: .3rem;
+  text-align: start;
+}

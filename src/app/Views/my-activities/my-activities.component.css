@@ -1,0 +1,6 @@
+.myactivities-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5px;
+}

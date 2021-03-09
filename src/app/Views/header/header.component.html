@@ -12,8 +12,8 @@
     <ul class="header-menu-nav" *ngIf="isLoggedIn">
       <li class="header-menu-nav-item"><a routerLink="">Home</a></li>
 
-      <li class="header-menu-nav-item" *ngIf="userLoggedIn.type === 0"><a>Favorites</a></li>
-      <li class="header-menu-nav-item" *ngIf="userLoggedIn.type === 0"><a>My Activities</a></li>
+      <li class="header-menu-nav-item" *ngIf="userLoggedIn.type === 0"><a routerLink="/favorites">Favorites</a></li>
+      <li class="header-menu-nav-item" *ngIf="userLoggedIn.type === 0"><a routerLink="/my-activities">My Activities</a></li>
       <li class="header-menu-nav-item" *ngIf="userLoggedIn.type === 1" routerLink="/admin"><a>Admin</a></li>
 
       <li class="header-menu-nav-item"><a routerLink="/profile">Profile</a></li>

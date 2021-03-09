@@ -1,33 +1,21 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Activity } from 'src/app/Shared/models/activity';
-import { ActivityService } from 'src/app/Shared/services/activity.service';
 
 @Component({
   selector: 'app-activities-list',
   templateUrl: './activities-list.component.html',
   styleUrls: ['./activities-list.component.css']
 })
-export class ActivitiesListComponent implements OnInit, OnDestroy {
+export class ActivitiesListComponent implements OnInit {
   @Output() activityToSeeInDetail = new EventEmitter<Activity>();
-  activityList: Activity[];
-  activitiesSub$: Subscription;
+  @Input() activityList: Activity[];
 
-  constructor(private activityService: ActivityService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.activitiesSub$ = this.activityService.getActivities().subscribe(activities => {
-      this.activityList = activities;
-
-      this.activityToSeeInDetail.emit(this.activityList[0]);
-    });
   }
 
   onActionClicked(activity: Activity): void {
     this.activityToSeeInDetail.emit(activity);
-  }
-
-  ngOnDestroy(): void {
-    this.activitiesSub$.unsubscribe();
   }
 }

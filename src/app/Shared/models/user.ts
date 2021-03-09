@@ -10,9 +10,7 @@ interface IUser {
   readonly email: string;
   readonly password: string;
   profile: IProfile;
-  activitiesFavsIds?: Array<string>;
-  activitiesJoinedIds?: Array<string>;
-  activitiesCreatedIds?: Array<string>;
+  activitiesFavsIds?: Array<number>;
 }
 
 export class User implements IUser {
@@ -23,9 +21,7 @@ export class User implements IUser {
     public email: string,
     public password: string,
     public profile: TouristProfile | CompanyProfile,
-    public activitiesFavsIds?: Array<string>,
-    public activitiesJoinedIds?: Array<string>,
-    public activitiesCreatedIds?: Array<string>,
+    public activitiesFavsIds?: Array<number>,
     public id?: number,
   ) {}
 }

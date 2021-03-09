@@ -7,13 +7,19 @@
       <div class="item"><h4>Description: <span class="content">{{activitySelected.description}}</span></h4></div>
       <div class="item"><h4>Language: <span class="content">{{activitySelected.language}}</span></h4></div>
       <div class="item"><h4>Date: <span class="content">{{activitySelected.date | date: 'M/d/yy'}}</span></h4></div>
-      <div class="item detail-bottom"><h4>People registered: <span class="content">{{activitySelected.peopleRegistered}}</span></h4></div>
+      <div class="item detail-bottom"><h4>People registered: <span class="content">{{activitySelected.peopleRegistered.length}}</span></h4></div>
     </div>
     <div class="activity-right">
       <div class="item"><h4>Category: <span class="content">{{activitySelected.category}}</span></h4></div>
       <div class="item"><h4>Subcategory: <span class="content">{{activitySelected.subcategory}}</span></h4></div>
       <div class="item"><h4>Price: <span class="content">{{activitySelected.price}}</span></h4></div>
-      <div class="item detail-bottom" *ngIf="userLoggedIn?.type === 0"><button class="button">SIGN UP</button></div>
+      <div class="item detail-bottom" *ngIf="userLoggedIn?.type === 0">
+        <button class="button" *ngIf="!userIsSignedUp" (click)="signUpUser()">SIGN UP</button>
+        <div class="activity-error" *ngIf="userAlreadyInscribed">
+          <span>You're already inscribed in this activity...</span>
+        </div>
+        <button class="button" *ngIf="userIsSignedUp" (click)="cancelSignUpUser()">CANCEL INSCRIPTION</button>
+      </div>
     </div>
     <div class="activity-favs" *ngIf="userLoggedIn?.type === 0">
       <button style="font-size: 1.3rem;border-radius: 4px;">❤️</button>

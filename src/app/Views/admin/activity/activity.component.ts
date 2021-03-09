@@ -139,7 +139,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
           price: this.price.value,
           language: this.language.value,
           date: this.date.value,
-          peopleRegistered: 0
+          peopleRegistered: []
       }).subscribe(() => {
         this.router.navigateByUrl('/admin');
       });
