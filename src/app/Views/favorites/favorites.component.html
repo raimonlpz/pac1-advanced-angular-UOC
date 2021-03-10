@@ -1,1 +1,14 @@
-<p>favorites works!</p>
+<div class="favorites-wrapper">
+
+  <app-activities-list style="width:45%;"
+    (activityToSeeInDetail)="onActivitySelected($event)"
+    [activityList]="activities"
+  ></app-activities-list>
+
+  <app-activity-detail style="width:45%;"
+    [activitySelected]="activitySelected"
+    [userIsInFavs]="true"
+    (cancelFavs)="onFavsCancelled()"
+  ></app-activity-detail>
+
+</div>

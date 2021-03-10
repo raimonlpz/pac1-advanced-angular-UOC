@@ -46,7 +46,7 @@
         <label>NIF: </label>
         <input type="text" [formControl]="nif" placeholder="Your NIF" />
         <div class="profile-error" *ngIf="profileForm.get('nif').errors && (profileForm.get('nif').touched || profileForm.get('nif').dirty)">
-          <!-- <span *ngIf="profileForm.get('nif').errors.required">Nif is required.<br/></span> -->
+          <span *ngIf="profileForm.get('nif').errors.invalidNIF">Invalid NIF (ESP).</span>
         </div>
       </div>
       <div class="profile-about item">

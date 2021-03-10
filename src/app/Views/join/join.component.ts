@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompanyProfile, TouristProfile } from 'src/app/Shared/models/profile';
-import { User, UserType } from 'src/app/Shared/models/user';
+import { UserType } from 'src/app/Shared/models/user';
 import { AuthService } from 'src/app/Shared/services/auth.service';
 import { CheckConfirmationPassword } from '../../Shared/directives/confirm-password.validators';
 
@@ -76,7 +76,6 @@ export class JoinComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
         console.log(loggedIn);
       } else {
-        /* TO-DO!!!! FIX ISSUE ON USER ALREADY EXISTS */
         if (this.firstBehaviorSubjectSetUpAbortion) { this.userAlreadyExistsNotification = true; }
       }
       this.firstBehaviorSubjectSetUpAbortion = true;
@@ -93,8 +92,7 @@ export class JoinComponent implements OnInit, OnDestroy {
       password: this.password.value,
       profile: isTourist
         ? new TouristProfile(this.name.value, null, null, [], this.surname.value)
-        : new CompanyProfile(this.name.value, null, null, [], null, null, null, this.surname.value),
-      activitiesFavsIds: isTourist ? [] : null
+        : new CompanyProfile(this.name.value, null, null, [], null, null, null, this.surname.value)
     });
   }
 

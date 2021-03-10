@@ -22,8 +22,10 @@
       </div>
     </div>
     <div class="activity-favs" *ngIf="userLoggedIn?.type === 0">
-      <button style="font-size: 1.3rem;border-radius: 4px;">❤️</button>
-      <div><span style="font-size: .8rem;">Save Favorites</span></div>
+      <button style="font-size: 1.3rem;border-radius: 4px;" *ngIf="!userIsInFavs" (click)="saveInFavs()">❤️</button>
+      <button style="font-size: 1.3rem;border-radius: 4px;" *ngIf="userIsInFavs" (click)="removeFromFavs()">💔</button>
+      <div><span style="font-size: .8rem;" *ngIf="!userIsInFavs">Save Favorites</span></div>
+      <div><span style="font-size: .8rem;" *ngIf="userIsInFavs">Remove from Favs</span></div>
     </div>
   </div>
 </div>

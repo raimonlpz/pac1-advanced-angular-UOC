@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
+  /* TO-DO: guards customized for roles Tourist & Company */
   constructor(private auth: AuthService, private router: Router) {}
 
   canActivate(
@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
       return new Observable<boolean>(obs => {
         this.auth.userLoggedIn.subscribe(isLogged => {
           if (isLogged) { return obs.next(true); }
-          this.router.navigateByUrl('/home');
+          // this.router.navigateByUrl('/home');
           return obs.next(false);
         });
       });

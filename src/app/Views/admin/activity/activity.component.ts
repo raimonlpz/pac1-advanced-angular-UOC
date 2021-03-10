@@ -96,7 +96,6 @@ export class ActivityComponent implements OnInit, OnDestroy {
     ]);
     this.price = new FormControl(activity ? activity.price : 0, [
       Validators.required,
-      // Validators.pattern('\d+([.]\d+)?'),
       Validators.min(0)
     ]);
 
@@ -136,7 +135,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
           description: this.description.value,
           category: this.category.value,
           subcategory: this.subcategory.value,
-          price: this.price.value,
+          price: (this.price.value).toFixed(2),
           language: this.language.value,
           date: this.date.value,
           peopleRegistered: []
@@ -150,7 +149,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
         description: this.description.value,
         category: this.category.value,
         subcategory: this.subcategory.value,
-        price: this.price.value,
+        price: (this.price.value).toFixed(2),
         language: this.language.value,
         date: this.date.value,
         peopleRegistered: this.activity.peopleRegistered,

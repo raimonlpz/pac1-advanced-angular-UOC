@@ -6,6 +6,7 @@ import { CompanyProfile, Nationality, TouristProfile } from 'src/app/Shared/mode
 import { User, UserType } from 'src/app/Shared/models/user';
 import { AuthService } from 'src/app/Shared/services/auth.service';
 import { UserService } from 'src/app/Shared/services/user.service';
+import { CheckNIFValidators } from '../../../Shared/directives/check-nif.validators';
 
 @Component({
   selector: 'app-update',
@@ -13,9 +14,11 @@ import { UserService } from 'src/app/Shared/services/user.service';
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit, OnDestroy {
-
   userLoggedIn: User;
+
   isLoggedSub$: Subscription;
+  nationalitySub$: Subscription;
+
   profile: TouristProfile | CompanyProfile;
   readonly nationalities: Array<string> = Object.values(Nationality);
 
@@ -74,7 +77,7 @@ export class UpdateComponent implements OnInit, OnDestroy {
       this.profile.nationality ? this.profile.nationality : Nationality.ES,
       [Validators.required]
     );
-    this.nif = new FormControl(this.profile.nif);
+    this.nif = new FormControl(this.profile.nif, [CheckNIFValidators.checkNIFforESP(this.nationality.value)]);
     this.aboutMe = new FormControl(this.profile.aboutMe);
 
     if (this.userLoggedIn.type === UserType.Company) {
@@ -87,11 +90,15 @@ export class UpdateComponent implements OnInit, OnDestroy {
       this.companyDescription = new FormControl((this.profile as CompanyProfile).companyDescription);
       this.cif = new FormControl((this.profile as CompanyProfile).cif, [Validators.required]);
     } else {
-      /* If user type is Tourist ignore this Form controls validation requirements... */
       this.companyName = new FormControl();
       this.companyDescription = new FormControl();
       this.cif = new FormControl();
     }
+
+    this.nationalitySub$ = this.nationality.valueChanges.subscribe(nat => {
+      this.nif.clearValidators();
+      this.nif.setValidators(CheckNIFValidators.checkNIFforESP(nat));
+    });
 
     this.profileForm = this.formBuilder.group({
       name: this.name,
@@ -99,7 +106,7 @@ export class UpdateComponent implements OnInit, OnDestroy {
       birthDate: this.birthDate,
       phone: this.phone,
       nationality: this.nationality,
-      nif: this.nif, // ¡¡TO-DO!! validation of NIF with directive
+      nif: this.nif,
       aboutMe: this.aboutMe,
       companyName: this.companyName,
       companyDescription: this.companyDescription,
@@ -144,8 +151,10 @@ export class UpdateComponent implements OnInit, OnDestroy {
     });
   }
 
+
   ngOnDestroy(): void {
     this.isLoggedSub$.unsubscribe();
+    this.nationalitySub$.unsubscribe();
   }
 
 }

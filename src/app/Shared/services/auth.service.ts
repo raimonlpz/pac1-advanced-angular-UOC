@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user';
 import { UserService } from './user.service';
 
@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private userService: UserService) {}
 
-  registerUser({name, surname, type, email, password, profile, activitiesFavsIds }): void {
+  registerUser({ name, surname, type, email, password, profile }): void {
     this.userService.getUsers().subscribe(users => {
       const user = users.filter(us => us.email === email)[0];
       if (!user) {
@@ -21,8 +21,7 @@ export class AuthService {
           type,
           email,
           password,
-          profile,
-          activitiesFavsIds,
+          profile
         }).subscribe(newUser => {
           return this.userLoggedIn.next(newUser);
         });

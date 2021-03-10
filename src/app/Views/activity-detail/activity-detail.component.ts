@@ -14,8 +14,10 @@ export class ActivityDetailComponent implements OnInit, OnDestroy {
   @Input() activitySelected: Activity;
   @Input() userIsSignedUp: boolean;
   @Output() cancelSubscription = new EventEmitter();
+  @Output() cancelFavs = new EventEmitter();
 
   userAlreadyInscribed = false;
+  @Input() userIsInFavs = false;
 
   userLoggedIn: User = null;
   isLoggedSub$: Subscription;
@@ -57,6 +59,28 @@ export class ActivityDetailComponent implements OnInit, OnDestroy {
     }).subscribe(() => {
       this.cancelSubscription.emit();
     });
+  }
+
+  saveInFavs(): void {
+    let currentStorage = JSON.parse(window.localStorage.getItem(`FavActivities-User${this.userLoggedIn.id}`));
+    if (currentStorage) {
+      if (currentStorage.indexOf(this.activitySelected.id) === -1) {
+        currentStorage = [...currentStorage, this.activitySelected.id];
+      }
+    } else { currentStorage = [this.activitySelected.id]; }
+
+    window.localStorage.setItem(`FavActivities-User${this.userLoggedIn.id}`, JSON.stringify(currentStorage));
+  }
+
+  removeFromFavs(): void {
+    const currentStorage = JSON.parse(window.localStorage.getItem(`FavActivities-User${this.userLoggedIn.id}`));
+    if (currentStorage) {
+      if (currentStorage.indexOf(this.activitySelected.id) !== -1) {
+        currentStorage.splice(currentStorage.indexOf(this.activitySelected.id), 1);
+      }
+      window.localStorage.setItem(`FavActivities-User${this.userLoggedIn.id}`, JSON.stringify([...currentStorage]));
+      this.cancelFavs.emit();
+    }
   }
 
   ngOnDestroy(): void {
